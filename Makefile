@@ -1,7 +1,11 @@
 FC=gfortran-6.2
-FF=-O2 -Wall -Wextra -Wpedantic
+FF=-O2 -Wall -Wextra -Wpedantic -Wno-tabs
 AR=ar
 
-all: main.f90 apf.f90
+all: test
+
+test: main.f90 apf.o
+	$(FC) $(FF) apf.o main.f90 -o test
+
+apf.o: apf.f90
 	$(FC) $(FF) -c apf.f90 -o apf.o
-	$(FC) $(FF) main.f90 apf.o -o test
